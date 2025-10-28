@@ -1,0 +1,9 @@
+apache-airflow==2.9.3
+apache-airflow-providers-http
+apache-airflow-providers-postgres
+pandas
+requests
+psycopg2-binary
+SQLAlchemy
+great-expectations
+python-dateutil
