@@ -2,8 +2,8 @@ services:
   airflow_db:
     image: postgres:16
     environment:
-      POSTGRES_USER: airflow
-      POSTGRES_PASSWORD: airflow
+      POSTGRES_USER: POSTGRES_USER
+      POSTGRES_PASSWORD: POSTGRES_PASSWORD
       POSTGRES_DB: airflow
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U airflow"]
@@ -16,11 +16,11 @@ services:
   warehouse_db:
     image: postgres:16
     environment:
-      POSTGRES_USER: warehouse
-      POSTGRES_PASSWORD: warehouse
+      POSTGRES_USER: 
+      POSTGRES_PASSWORD: 
       POSTGRES_DB: warehouse
     ports:
-      - "5433:5432"
+      - ":" #write the port you want
     volumes:
       - warehouse_db:/var/lib/postgresql/data
 
@@ -33,21 +33,27 @@ services:
         condition: service_started
     environment:
       AIRFLOW__CORE__LOAD_EXAMPLES: "false"
-      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@airflow_db:5432/airflow
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://POSTGRES_USERPOSTGRES_PASSWORD@airflow_db:5432/airflow
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__CORE__DEFAULT_TIMEZONE: Europe/Athens
       # Δημιουργεί αυτόματα Airflow connection id: postgres_warehouse
-      AIRFLOW_CONN_POSTGRES_WAREHOUSE: postgresql+psycopg2://warehouse:warehouse@warehouse_db:5432/warehouse
+      AIRFLOW_CONN_POSTGRES_WAREHOUSE: postgresql+psycopg2://POSTGRES_USERPOSTGRES_PASSWORD@warehouse_db:5432/warehouse
     volumes:
       - ./dags:/opt/airflow/dags
       - ./requirements.txt:/opt/airflow/requirements.txt
     command: >
       bash -lc "pip install -r /opt/airflow/requirements.txt &&
                 airflow db init &&
-                airflow users create --username admin --password admin --firstname Air --lastname Flow --role Admin --email admin@example.com &&
+                airflow users create 
+                --username something 
+                --password something 
+                --firstname Air 
+                --lastname Flow 
+                --role Admin 
+                --email something@example.com &&
                 airflow webserver -p 8080 & airflow scheduler"
     ports:
-      - "8080:8080"   # αν θες άλλαξε σε "8090:8080"
+      - ""   #write the port you want
 
 volumes:
   airflow_db:
