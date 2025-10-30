@@ -38,8 +38,7 @@ PostgreSQL Warehouse
 - Extensible design for additional data sources or transformations
 - Reproducible environment with Docker Compose
 
-## Getting Started
-Prerequisites:
+## Prerequisites:
 - Docker and Docker Compose installed
 - Python 
 - Weather API key 
