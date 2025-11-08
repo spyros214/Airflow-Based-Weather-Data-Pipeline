@@ -1,5 +1,5 @@
 # Airflow-Based Weather Data Pipeline
-A fully automated **data engineering project** that ingests weather data from a public API, cleans and validates it, and stores it in a **PostgreSQL data warehouse** — orchestrated by **Apache Airflow**.
+A fully automated **data engineering project** that ingests weather data from a public API, cleans and validates it, and stores it in a **PostgreSQL data warehouse**, orchestrated by **Apache Airflow**.
 
 ## Overview
 This project demonstrates a real-world **ETL pipeline** built using modern data engineering tools.  
